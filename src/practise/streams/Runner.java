@@ -19,6 +19,7 @@ public class Runner {
         list.add(6);
         list.stream().distinct().collect(Collectors.toList());
         Map<Boolean, List<Integer>> result = list.stream().collect(Collectors.partitioningBy(i -> i % 2 == 0));
+        list.stream().mapToInt(Integer::intValue).average();
         Map<Integer, Long> result2 = list.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
     }
