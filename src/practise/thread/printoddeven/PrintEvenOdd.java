@@ -1,42 +1,44 @@
 package practise.thread.printoddeven;
 
 public class PrintEvenOdd {
-    static int count = 1;
+    static int counter = 1;
 
-    static int N = 10;
+    static int limit = 10;
 
-    private static final Object lock = new Object();
+    static final Object lock = new Object();
 
-    public void printOddNumber() {
+    public void printOddNum() {
         synchronized (lock) {
-            while (count < N) {
-                while (count % 2 == 0) {
+            while (counter <= limit) {
+                if (counter % 2 == 1) {
+                    System.out.println(counter);
+                    counter++;
+                    lock.notifyAll();
+                } else {
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                System.out.print(count + " ");
-                count++;
-                lock.notify();
             }
         }
     }
 
-    public void printEvenNumber() {
-        synchronized (this) {
-            while (count < N) {
-                while (count % 2 == 1) {
+    public void printEvenNum() {
+        synchronized (lock) {
+            while (counter <= limit) {
+                if (counter % 2 == 0) {
+                    System.out.println(counter);
+                    counter++;
+                    lock.notifyAll();
+                } else {
                     try {
-                        wait();
+                        lock.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                System.out.print(count + " ");
-                count++;
-                notify();
             }
         }
     }

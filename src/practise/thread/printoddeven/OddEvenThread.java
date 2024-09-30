@@ -6,14 +6,14 @@ public class OddEvenThread {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                printEvenOdd.printOddNumber();
+                printEvenOdd.printOddNum();
             }
         });
 
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                printEvenOdd.printEvenNumber();
+                printEvenOdd.printEvenNum();
             }
         });
 
