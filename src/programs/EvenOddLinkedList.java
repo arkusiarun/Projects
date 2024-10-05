@@ -1,13 +1,5 @@
 package programs;
 
-class Node {
-    Node next;
-    int value;
-    public Node(int val) {
-        this.value = val;
-    }
-}
-
 public class EvenOddLinkedList {
     static Node evenOdd(Node head) {
         if (head == null || head.next == null) {
