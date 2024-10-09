@@ -11,8 +11,9 @@ public class Java8Programs {
 
     public static void main(String[] args) {
         getDistinctElements();
-        getAllEven();
+        getSegregateEvenOdd();
         getCountOfEveryElement();
+        getAverage();
     }
 
     static void getDistinctElements() {
@@ -23,7 +24,7 @@ public class Java8Programs {
         }
     }
 
-    static void getAllEven() {
+    static void getSegregateEvenOdd() {
         int[] arr = new int[]{1,2,3,4,5,6};
         Map<Boolean, List<Integer>> result = Arrays.stream(arr).mapToObj(Integer::new).collect(Collectors.partitioningBy(i -> i % 2 == 0));
         for(boolean key: result.keySet()) {
@@ -44,5 +45,12 @@ public class Java8Programs {
             System.out.println("Value : " + result.get(key));
         }
     }
+
+    static void getAverage() {
+        int[] arr = new int[]{1,2,1,4,5,6};
+        Double result = Arrays.stream(arr).average().getAsDouble();
+        System.out.println("Average :" + result);
+    }
+
 
 }
