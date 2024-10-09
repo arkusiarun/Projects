@@ -1,74 +1,63 @@
 package test;
 
+class Node {
+    int val;
+    Node next;
+
+    public Node(int val) {
+        this.val = val;
+    }
+}
+
 public class Runner {
 
-    // Starting counter
-    //will force all threads to update and use the latest copy of this counter, and not use locally cached copies
-    static int counter = 1;
+    // List1 = 1->2->4
+    // List2 = 1->3->4
+    // Result = 1->1->2->3->4->4
 
-    int limit;
-
-    Runner (int limit) {this.limit = limit;}
-
-    //function to print odd numbers
-    public synchronized void printOddNum () {
-        while(counter<=limit) {
-            if(counter%2 == 1) { //counter is odd, print it
-                // remove thread name and use System.out.print() to print in one line, as per the sample output format
-                System.out.println(Thread.currentThread().getName()+": "+counter);
-                counter++;
-                notifyAll();
-            } else {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+    static Node mergeList(Node list1, Node list2) {
+        Node curr = new Node(-1);
+        Node head = curr;
+        while(list1 != null && list2 != null) {
+            if(list1.val <= list2.val) {
+                curr.next = list1;
+                list1 = list1.next;
             }
+            else {
+                curr.next = list2;
+                list2 = list2.next;
+            }
+            curr = curr.next;
         }
+
+        if(list1!= null) {
+            curr.next = list1;
+        }
+
+        if(list2!= null) {
+            curr.next = list2;
+        }
+
+        return head.next;
     }
 
-    // Function to print even numbers
-    public synchronized void printEvenNum () {
-        while (counter<=limit) {
-            if(counter%2 == 0) { //counter is even, print it
-                // remove thread name and use System.out.print() to print in one line, as per the sample output format
-                System.out.println(Thread.currentThread().getName()+": "+counter);
-                counter++;
-                notifyAll();
-            } else {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    // Driver Code
     public static void main(String[] args) {
-        Runner printer = new Runner (10);
+        Node head1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(4);
+        head1.next = node2;
+        node2.next = node3;
 
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                printer.printOddNum();
-            }
-        });
+        Node head2 = new Node(1);
+        Node node5 = new Node(3);
+        Node node6 = new Node(4);
+        head2.next = node5;
+        node5.next = node6;
 
-        t1.setName("Odd");
-
-        Thread t2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                printer.printEvenNum();
-            }
-        });
-
-        t2.setName("Even"); // for clearer verification
-
-        t1.start();
-        t2.start();
+        Node head = mergeList(head1, head2);
+        while (head != null) {
+            System.out.print(head.val);
+            head = head.next;
+        }
     }
 }
