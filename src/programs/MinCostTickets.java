@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MinCostTickets {
-    static int mincostTickets(int[] days, int[] costs) {
+    static int minCostTickets(int[] days, int[] costs) {
         int lastDay = days[days.length - 1];
         int[] dp = new int[lastDay + 1];
         Set<Integer> travelDays = new HashSet<>();
