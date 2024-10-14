@@ -28,6 +28,6 @@ public class MinCostTickets {
         int[] days = {1, 4, 6, 7, 8, 20};
         int[] costs = {2, 7, 15};
 
-        System.out.println(mincostTickets(days, costs));
+        System.out.println(minCostTickets(days, costs));
     }
 }
