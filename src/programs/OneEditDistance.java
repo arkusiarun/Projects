@@ -49,8 +49,8 @@ public class OneEditDistance {
     }
 
     public static void main(String[] args) {
-        System.out.println(isOneEditDistance("fog", "foo")); //Done
-        System.out.println(isOneEditDistance("grab", "grab")); //Done
+        System.out.println(isOneEditDistanceDP("fog", "foo")); //Done
+/*        System.out.println(isOneEditDistance("grab", "grab")); //Done
         System.out.println(isOneEditDistance("grab", "brag")); //Done
         System.out.println(isOneEditDistance("listen", "listez"));
         System.out.println(isOneEditDistance("listen", "lisnen"));
@@ -62,6 +62,6 @@ public class OneEditDistance {
         System.out.println(isOneEditDistance("", ""));
         System.out.println(isOneEditDistance("bab", "ab"));
         System.out.println(isOneEditDistance("abcd", "abcde"));
-        System.out.println(isOneEditDistance("abc", "abdc"));
+        System.out.println(isOneEditDistance("abc", "abdc"));*/
     }
 }
