@@ -1,6 +1,6 @@
 package programs;
 
-public class SeperateWhileAndBlackBalls {
+public class SeperateWhiteAndBlackBalls {
     public long minimumSteps(String s) {
         long swap = 0;
         int black = 0;
