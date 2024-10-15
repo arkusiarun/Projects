@@ -1,6 +1,7 @@
 package assessment.bidSystem;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Runner {
 
@@ -29,7 +30,7 @@ public class Runner {
 
         //LIST_WINNERS
         for (Winner winner : winnerService.getAllWinners()) {
-            System.out.println(winner.getEventId() + ", " + winner.getUserName() + ", " + winner.getLowestBid() + ", " + winner.getWinningDate());
+            System.out.println("{ " + winner.getEventId() + ", " + winner.getUserName() + ", " + winner.getLowestBid() + ", " + new SimpleDateFormat("yyyy-MM-dd").format(winner.getWinningDate()) + " }");
         }
     }
 }
