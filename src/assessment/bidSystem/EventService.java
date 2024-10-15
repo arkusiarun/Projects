@@ -2,7 +2,10 @@ package assessment.bidSystem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class EventService {
     static List<Event> eventList;
@@ -20,16 +23,16 @@ public class EventService {
     }
 
     public void createEvent(int eventId, String eventName, String prizeName, String eventDate) throws ParseException {
-        if(getEvent(eventId) == null) {
+        if (getEvent(eventId) == null) {
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(eventDate);
             this.eventList.add(new Event(eventId, eventName, prizeName, date));
-            System.out.println(eventName + " with prize " + prizeName +  " added successfully");
+            System.out.println(eventName + " with prize " + prizeName + " added successfully");
         }
     }
 
     public static Event getEvent(int eventId) {
-        for(Event event: eventList) {
-            if(event.getEventId() == eventId) {
+        for (Event event : eventList) {
+            if (event.getEventId() == eventId) {
                 return event;
             }
         }
@@ -53,12 +56,11 @@ public class EventService {
     public void submitBid(int userId, int eventId, int... bidsArr) {
         Event event = getEvent(eventId);
         User user = UserService.getUser(userId);
-        if(user == null) {
+        if (user == null) {
             System.out.println("User Not Found");
             return;
         }
-        List<Bid> bids = event.getMembers().get(userId);
-        if (bids == null) {
+        if (event.getMembers().get(userId) == null) {
             System.out.println("Member did not registered for this event");
             return;
         }
