@@ -37,10 +37,10 @@ public class StringToInteger {
     }
 
     public static void main(String[] args) {
-        String input1 = "42";
-        String input2 = "-042";
-
-        System.out.println(myAtoi(input1));
-        System.out.println(myAtoi(input2));
+        System.out.println(myAtoi("42"));
+        System.out.println(myAtoi("-42"));
+        System.out.println(myAtoi("4193 with words"));  // Output: 4193
+        System.out.println(myAtoi("words and 987"));    // Output: 0
+        System.out.println(myAtoi("-91283472332"));
     }
 }
