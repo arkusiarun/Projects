@@ -3,7 +3,7 @@ package assessment.lruCache;
 import java.util.HashMap;
 import java.util.Map;
 
-class LRUCache {
+public class LRUCache {
 
     Node head = new Node(0,0);
     Node tail = new Node(0,0);
@@ -49,5 +49,15 @@ class LRUCache {
         node.prev = head;
         headNext.prev = node;
         node.next = headNext;
+    }
+
+    public static void main(String[] args) {
+        LRUCache lruCache = new LRUCache(3);
+        System.out.println(lruCache.get(1));
+        lruCache.put(1,1);
+        lruCache.put(2,2);
+        lruCache.put(3,3);
+        lruCache.put(4,4);
+        System.out.println(lruCache.get(2));
     }
 }
