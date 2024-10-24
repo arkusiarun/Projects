@@ -2,71 +2,30 @@ package programs;
 
 public class RearrangeLinkedList {
 
-    public static Node rearrange(Node head) {
-        if (head == null) return null;
+    public static Node rearrangeLinkedList(Node head) {
+        // Dummy nodes for the two partitions
+        Node negativeHead = new Node(0);
+        Node positiveHead = new Node(0);
 
-        Node negHead = null, negTail = null; // Head and tail for negative list
-        Node posHead = null, posTail = null; // Head and tail for positive list
+        // Pointers to build the two lists
+        Node negative = negativeHead;
+        Node positive = positiveHead;
 
-        // Separate negative and positive nodes
         while (head != null) {
             if (head.value < 0) {
-                // Add to negative list
-                if (negHead == null) {
-                    negHead = negTail = head;
-                } else {
-                    negTail.next = head;
-                    negTail = negTail.next;
-                }
+                negative.next = head;
+                negative = negative.next;
             } else {
-                // Add to positive list
-                if (posHead == null) {
-                    posHead = posTail = head;
-                } else {
-                    posTail.next = head;
-                    posTail = posTail.next;
-                }
+                positive.next = head;
+                positive = positive.next;
             }
             head = head.next;
         }
 
-        // Ensure the end of each list points to null
-        if (negTail != null) negTail.next = null;
-        if (posTail != null) posTail.next = null;
+        negative.next = positiveHead.next;
+        positive.next = null;
 
-        // Merge the two lists
-        Node resultHead = null, resultTail = null;
-        boolean takeNeg = true;
-
-        while (negHead != null || posHead != null) {
-            if (takeNeg && negHead != null) {
-                if (resultHead == null) {
-                    resultHead = resultTail = negHead;
-                } else {
-                    resultTail.next = negHead;
-                    resultTail = resultTail.next;
-                }
-                negHead = negHead.next;
-                takeNeg = false; // Next should take positive
-            } else if (!takeNeg && posHead != null) {
-                if (resultHead == null) {
-                    resultHead = resultTail = posHead;
-                } else {
-                    resultTail.next = posHead;
-                    resultTail = resultTail.next;
-                }
-                posHead = posHead.next;
-                takeNeg = true; // Next should take negative
-            } else {
-                // If one list is exhausted, we stop
-                break;
-            }
-        }
-
-        // Make sure the final node points to null
-        if (resultTail != null) resultTail.next = null;
-
-        return resultHead;
+        return negativeHead.next;
     }
 
     public static void printList(Node head) {
@@ -88,10 +47,7 @@ public class RearrangeLinkedList {
         head.next.next.next.next.next.next = new Node(-3);
         head.next.next.next.next.next.next.next = new Node(2);
 
-        System.out.println("Original Linked List:");
-        printList(head);
-
-        Node rearrangedHead = rearrange(head);
+        Node rearrangedHead = (head);
         System.out.println("Rearranged Linked List:");
         printList(rearrangedHead);
     }
