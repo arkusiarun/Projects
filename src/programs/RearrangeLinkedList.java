@@ -3,11 +3,9 @@ package programs;
 public class RearrangeLinkedList {
 
     public static Node rearrangeLinkedList(Node head) {
-        // Dummy nodes for the two partitions
         Node negativeHead = new Node(0);
         Node positiveHead = new Node(0);
 
-        // Pointers to build the two lists
         Node negative = negativeHead;
         Node positive = positiveHead;
 
