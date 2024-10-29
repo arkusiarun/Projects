@@ -4,15 +4,6 @@ import java.util.Stack;
 
 public class LongestValidParentheses {
 
-    public static void main(String[] args) {
-        String input1 = "(()";
-        String input2 = ")()())";
-        String input3 = "";
-        System.out.println("Input : " + input1 + " Length is : " + longestValidParentheses(input1));
-        System.out.println("Input : " + input2 + " Length is : " + longestValidParentheses(input2));
-        System.out.println("Input : " + input3 + " Length is : " + longestValidParentheses(input3));
-    }
-
     public static int longestValidParentheses(String s) {
         Stack<Integer> stack = new Stack<>();
         stack.push(-1);
@@ -31,5 +22,14 @@ public class LongestValidParentheses {
             }
         }
         return maxLen;
+    }
+
+    public static void main(String[] args) {
+        String input1 = "(()";
+        String input2 = ")()())";
+        String input3 = "";
+        System.out.println("Input : " + input1 + " Length is : " + longestValidParentheses(input1));
+        System.out.println("Input : " + input2 + " Length is : " + longestValidParentheses(input2));
+        System.out.println("Input : " + input3 + " Length is : " + longestValidParentheses(input3));
     }
 }
