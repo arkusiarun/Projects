@@ -4,14 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LongestSubStringWithoutRepeatingCharacters {
-    public static void main(String[] args) {
-        String str1 = "abcabcbb";
-        String str2 = "bbbbb";
-        String str3 = "pwwkew";
-        System.out.println("Length : " + longestSubString(str1));
-        System.out.println("Length : " + longestSubString(str2));
-        System.out.println("Length : " + longestSubString(str3));
-    }
 
     static int longestSubString(String str) {
         System.out.println("Input String : "+  str);
@@ -32,5 +24,14 @@ public class LongestSubStringWithoutRepeatingCharacters {
         }
         System.out.println("Result String :" + result);
         return maxLength;
+    }
+
+    public static void main(String[] args) {
+        String str1 = "abcabcbb";
+        String str2 = "bbbbb";
+        String str3 = "pwwkew";
+        System.out.println("Length : " + longestSubString(str1));
+        System.out.println("Length : " + longestSubString(str2));
+        System.out.println("Length : " + longestSubString(str3));
     }
 }
