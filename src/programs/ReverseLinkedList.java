@@ -1,6 +1,7 @@
 package programs;
 
 public class ReverseLinkedList {
+
     public Node reverseList(Node head) {
         if (head == null || head.next == null) {
             return head;
@@ -16,11 +17,11 @@ public class ReverseLinkedList {
         return prev;
     }
 
-    public static Node reverseLinkedList(Node head) {
+    public static Node reverseLinkedListRecusrion(Node head) {
         if (head == null || head.next == null) {
             return head;
         }
-        Node reversedList = reverseLinkedList(head.next);
+        Node reversedList = reverseLinkedListRecusrion(head.next);
         head.next.next = head;
         head.next = null;
         return reversedList;
