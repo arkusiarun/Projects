@@ -56,12 +56,24 @@ public class UserSlidingWindowRateLimiter {
         UserSlidingWindowRateLimiter rateLimiter = new UserSlidingWindowRateLimiter(5, 10000);
 
         // Simulate requests from different users
-        Runnable task = (userId) -> {
+        Runnable user1Task = () -> {
             for (int i = 0; i < 10; i++) {
-                boolean allowed = rateLimiter.allowRequest((String) userId);
-                System.out.println(Thread.currentThread().getName() + " - User " + userId + " - Request " + (i + 1) + " allowed: " + allowed);
+                boolean allowed = rateLimiter.allowRequest("User1");
+                System.out.println(Thread.currentThread().getName() + " - User User1 - Request " + (i + 1) + " allowed: " + allowed);
                 try {
-                    Thread.sleep(500); // Simulate 2 requests per second per thread
+                    Thread.sleep(500); // Simulate 2 requests per second
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        };
+
+        Runnable user2Task = () -> {
+            for (int i = 0; i < 10; i++) {
+                boolean allowed = rateLimiter.allowRequest("User2");
+                System.out.println(Thread.currentThread().getName() + " - User User2 - Request " + (i + 1) + " allowed: " + allowed);
+                try {
+                    Thread.sleep(500); // Simulate 2 requests per second
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -69,8 +81,8 @@ public class UserSlidingWindowRateLimiter {
         };
 
         // Start threads simulating different users
-        Thread user1Thread = new Thread(() -> task.run("User1"), "Thread-User1");
-        Thread user2Thread = new Thread(() -> task.run("User2"), "Thread-User2");
+        Thread user1Thread = new Thread(user1Task, "Thread-User1");
+        Thread user2Thread = new Thread(user2Task, "Thread-User2");
 
         user1Thread.start();
         user2Thread.start();
