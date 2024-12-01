@@ -8,7 +8,7 @@ class ParkingSpot {
 
     public ParkingSpot(int spotId, String spotType) {
         this.spotId = spotId;
-        this.spotType = spotType.toUpperCase();
+        this.spotType = spotType;
         this.isOccupied = false;
     }
 

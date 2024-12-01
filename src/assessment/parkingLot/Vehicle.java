@@ -1,19 +1,15 @@
 package assessment.parkingLot;
 
-class Vehicle {
-    private String licensePlate;
-    private String type;
+abstract class Vehicle {
+    private final String licensePlate;
 
-    public Vehicle(String licensePlate, String type) {
+    public Vehicle(String licensePlate) {
         this.licensePlate = licensePlate;
-        this.type = type;
     }
 
     public String getLicensePlate() {
         return licensePlate;
     }
 
-    public String getType() {
-        return type;
-    }
+    public abstract String getType();
 }
