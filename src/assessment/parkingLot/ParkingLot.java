@@ -1,48 +1,68 @@
 package assessment.parkingLot;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ParkingLot {
-    private List<ParkingSpot> spots;
-    private Map<String, ParkingSpot> vehicleToSpotMap;
+    private final List<ParkingSpot> spots;
+    private final Map<String, ParkingSpot> vehicleToSpotMap;
+    private final Map<String, Ticket> activeTickets;
 
-    public ParkingLot(int numSpots) {
+    public ParkingLot(Map<String, Integer> spotConfig) {
         spots = new ArrayList<>();
         vehicleToSpotMap = new HashMap<>();
-        for (int i = 0; i < numSpots; i++) {
-            VehicleType type = (i % 2 == 0) ? VehicleType.MEDIUM : VehicleType.SMALL;
-            spots.add(new ParkingSpot(i, type));
-        }
-    }
+        activeTickets = new HashMap<>();
 
-    public boolean parkVehicle(Vehicle vehicle) {
-        for (ParkingSpot spot : spots) {
-            if (spot.park(vehicle)) {
-                vehicleToSpotMap.put(vehicle.getLicensePlate(), spot);
-                return true;
+        int spotId = 1;
+        for (Map.Entry<String, Integer> entry : spotConfig.entrySet()) {
+            String type = entry.getKey();
+            int count = entry.getValue();
+
+            for (int i = 0; i < count; i++) {
+                spots.add(new ParkingSpot(spotId++, type));
             }
         }
-        return false;
     }
 
-    public Vehicle leaveParking(String licensePlate) {
-        ParkingSpot spot = vehicleToSpotMap.remove(licensePlate);
-        if (spot != null) {
-            return spot.leave();
+    public Ticket parkVehicle(Vehicle vehicle) {
+        for (ParkingSpot spot : spots) {
+            if (spot.isAvailable() && spot.canFitVehicle(vehicle)) {
+                spot.parkVehicle(vehicle);
+                vehicleToSpotMap.put(vehicle.getLicensePlate(), spot);
+
+                // Generate a ticket
+                String ticketId = UUID.randomUUID().toString();
+                Ticket ticket = new Ticket(ticketId, vehicle.getLicensePlate(), spot.getSpotId());
+                activeTickets.put(ticketId, ticket);
+
+                System.out.println("Vehicle parked. Ticket issued: " + ticket);
+                return ticket;
+            }
         }
+        System.out.println("No available spot for vehicle type: " + vehicle.getType());
         return null;
     }
 
-    public List<ParkingSpot> getAvailableSpots() {
-        List<ParkingSpot> availableSpots = new ArrayList<>();
+    public boolean removeVehicle(String licensePlate) {
+        ParkingSpot spot = vehicleToSpotMap.get(licensePlate);
+        if (spot != null) {
+            spot.removeVehicle();
+            vehicleToSpotMap.remove(licensePlate);
+
+            // Remove the corresponding ticket
+            activeTickets.values().removeIf(ticket -> ticket.getLicensePlate().equals(licensePlate));
+            System.out.println("Vehicle with license plate " + licensePlate + " removed.");
+            return true;
+        }
+        System.out.println("Vehicle with license plate " + licensePlate + " not found.");
+        return false;
+    }
+
+    public void displayAvailableSpots() {
+        System.out.println("Available parking spots:");
         for (ParkingSpot spot : spots) {
             if (spot.isAvailable()) {
-                availableSpots.add(spot);
+                System.out.println("Spot ID: " + spot.getSpotId() + " | Type: " + spot.getSpotType());
             }
         }
-        return availableSpots;
     }
 }

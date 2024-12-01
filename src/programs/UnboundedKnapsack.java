@@ -19,10 +19,10 @@ public class UnboundedKnapsack {
     static int knapsack(int[] weights, int[] values, int maxCapacity) {
         int n = weights.length;
         int dp[] = new int[maxCapacity + 1];
-        for (int i = 0; i <=maxCapacity; i++) {
-            for(int j = 0; j < n; j++) {
-                if(weights[j] <= i) {
-                    dp[i] = Math.max(dp[i], dp[i-weights[j]]+ values[j]);
+        for (int i = 0; i <= maxCapacity; i++) {
+            for (int j = 0; j < n; j++) {
+                if (weights[j] <= i) {
+                    dp[i] = Math.max(dp[i], dp[i - weights[j]] + values[j]);
                 }
             }
         }

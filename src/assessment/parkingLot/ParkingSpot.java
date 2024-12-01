@@ -1,35 +1,60 @@
 package assessment.parkingLot;
 
 class ParkingSpot {
-    private int number;
-    private VehicleType type;
-    private Vehicle currentVehicle;
+    private final int spotId;
+    private final String spotType; // Type of vehicle the spot supports
+    private boolean isOccupied;
+    private Vehicle parkedVehicle;
 
-    public ParkingSpot(int number, VehicleType type) {
-        this.number = number;
-        this.type = type;
-        this.currentVehicle = null;
+    public ParkingSpot(int spotId, String spotType) {
+        this.spotId = spotId;
+        this.spotType = spotType.toUpperCase();
+        this.isOccupied = false;
     }
 
     public boolean isAvailable() {
-        return currentVehicle == null;
+        return !isOccupied;
     }
 
-    public boolean park(Vehicle vehicle) {
-        if (isAvailable() && vehicle.getType() == type) {
-            currentVehicle = vehicle;
-            return true;
+    public boolean canFitVehicle(Vehicle vehicle) {
+        return spotType.equals(vehicle.getType());
+    }
+
+    public void parkVehicle(Vehicle vehicle) {
+        if (canFitVehicle(vehicle) && !isOccupied) {
+            parkedVehicle = vehicle;
+            isOccupied = true;
+        } else {
+            throw new IllegalStateException("Cannot park vehicle in this spot!");
         }
-        return false;
     }
 
-    public Vehicle leave() {
-        Vehicle temp = currentVehicle;
-        currentVehicle = null;
-        return temp;
+    public void removeVehicle() {
+        parkedVehicle = null;
+        isOccupied = false;
     }
 
-    public int getNumber() {
-        return number;
+    public int getSpotId() {
+        return spotId;
+    }
+
+    public Vehicle getParkedVehicle() {
+        return parkedVehicle;
+    }
+
+    public String getSpotType() {
+        return spotType;
+    }
+
+    public boolean isOccupied() {
+        return isOccupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        isOccupied = occupied;
+    }
+
+    public void setParkedVehicle(Vehicle parkedVehicle) {
+        this.parkedVehicle = parkedVehicle;
     }
 }

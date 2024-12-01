@@ -2,9 +2,9 @@ package assessment.parkingLot;
 
 class Vehicle {
     private String licensePlate;
-    private VehicleType type;
+    private String type;
 
-    public Vehicle(String licensePlate, VehicleType type) {
+    public Vehicle(String licensePlate, String type) {
         this.licensePlate = licensePlate;
         this.type = type;
     }
@@ -13,7 +13,7 @@ class Vehicle {
         return licensePlate;
     }
 
-    public VehicleType getType() {
+    public String getType() {
         return type;
     }
 }
