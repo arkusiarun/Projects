@@ -6,7 +6,7 @@ public class Runner {
 
         SimpleThread simpleThread1 = new SimpleThread("T1", 1);
         SimpleThread simpleThread2 = new SimpleThread("T2", 2);
-        SimpleThread simpleThread3 = new SimpleThread("T3", 0);
+        SimpleThread simpleThread3 = new SimpleThread("T3", 3);
 
         Thread t1 = new Thread(simpleThread1);
         Thread t2 = new Thread(simpleThread2);

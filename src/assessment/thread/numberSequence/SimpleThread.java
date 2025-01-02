@@ -14,17 +14,21 @@ public class SimpleThread implements Runnable {
 
     @Override
     public void run() {
-        while (currentOrder <= limit) {
+        while (true) {
             synchronized (lock) {
-                while (currentOrder % 3 != order && currentOrder <= limit) {
+                int seq = (currentOrder % 3 == 0) ? 3 : currentOrder % 3;
+                if (seq != order) {
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
+                        break;
                     }
-                }
-                if (currentOrder <= limit) {
-                    System.out.println("Thread Name: " + this.name + " - Number: " + currentOrder);
+                } else if (currentOrder > limit) {
+                    lock.notifyAll();
+                    break;
+                } else {
+                    System.out.println("Thread Name: " + name + " - Number: " + currentOrder);
                     currentOrder++;
                     lock.notifyAll();
                 }
