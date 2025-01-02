@@ -52,7 +52,7 @@ public class InfiniteStreamExponentialSearch {
         InfiniteStreamExponentialSearch searcher = new InfiniteStreamExponentialSearch();
 
         // Let's say we are searching for 42 in the infinite stream
-        int target = 100;
+        int target = 2;
         boolean found = searcher.exponentialSearch(target);
 
         System.out.println("Found " + target + ": " + found);

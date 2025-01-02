@@ -41,7 +41,7 @@ public class PermutationOfString {
     }
 
     public static void main(String[] args) {
-        String str = "abc";
+        String str = "ROSPUG";
         //permute(str, 0, str.length() - 1);
         List<String> result = getPermutations(str);
         for(String s: result) {

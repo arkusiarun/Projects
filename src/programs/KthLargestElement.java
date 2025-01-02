@@ -6,7 +6,6 @@ public class KthLargestElement {
     public static int findKthLargest(int[] nums, int k) {
         // Min-Heap to store the k largest elements
         PriorityQueue<Integer> minHeap = new PriorityQueue<>(k);
-
         // Add elements to the heap
         for (int num : nums) {
             minHeap.offer(num); // Add element to the heap
