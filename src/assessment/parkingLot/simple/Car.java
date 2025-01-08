@@ -1,4 +1,4 @@
-package assessment.parkingLot;
+package assessment.parkingLot.simple;
 
 public class Car extends Vehicle {
     public Car(String licensePlate) {

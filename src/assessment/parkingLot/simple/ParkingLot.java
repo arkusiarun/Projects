@@ -1,4 +1,4 @@
-package assessment.parkingLot;
+package assessment.parkingLot.simple;
 
 import java.util.*;
 

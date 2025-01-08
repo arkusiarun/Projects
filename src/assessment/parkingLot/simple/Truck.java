@@ -1,4 +1,4 @@
-package assessment.parkingLot;
+package assessment.parkingLot.simple;
 
 // Truck class (inherits Vehicle)
 public class Truck extends Vehicle {

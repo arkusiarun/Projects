@@ -1,4 +1,4 @@
-package assessment.parkingLot;
+package assessment.parkingLot.simple;
 
 public class Bike extends Vehicle {
     public Bike(String licensePlate) {
