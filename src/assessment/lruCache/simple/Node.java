@@ -1,4 +1,4 @@
-package assessment.lruCache;
+package assessment.lruCache.simple;
 
 public class Node {
     int value;

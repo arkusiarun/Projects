@@ -1,4 +1,4 @@
-package assessment.lruCache;
+package assessment.lruCache.simple;
 
 import java.util.HashMap;
 import java.util.Map;
