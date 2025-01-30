@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Java8Programs {
 
@@ -14,6 +15,7 @@ public class Java8Programs {
         getSegregateEvenOdd();
         getCountOfEveryElement();
         getAverage();
+        reduceExample();
     }
 
     static void getDistinctElements() {
@@ -50,6 +52,13 @@ public class Java8Programs {
         int[] arr = new int[]{1,2,1,4,5,6};
         Double result = Arrays.stream(arr).average().getAsDouble();
         System.out.println("Average :" + result);
+    }
+
+    static void reduceExample() {
+        int[] arr = new int[]{12,3,4,5,10,8};
+        Integer sum = IntStream.of(arr).filter(num -> num%3==1 || num%5==1)
+                .reduce(0, (a,b) -> a+b);
+        System.out.println("Reduce: " + sum);
     }
 
 
