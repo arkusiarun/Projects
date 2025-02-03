@@ -36,6 +36,14 @@ public class LRUCache {
         insert(new Node(key, value));
     }
 
+    void print() {
+        Node temp = head.next;
+        while(temp.next!=null) {
+            System.out.println("Key :" + temp.key  + " Value :" + temp.value);
+            temp = temp.next;
+        }
+    }
+
     private void remove(Node node) {
         map.remove(node.key);
         node.prev.next = node.next;
